@@ -1,0 +1,9 @@
+*.o
+*.d
+loadbalancer
+tests/test_runner
+*.log
+site/docs/
+doxygen-warnings.txt
+demo-console.txt
+core

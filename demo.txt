@@ -1,0 +1,17 @@
+# Short verbose demonstration with visible scaling in both directions.
+servers=20
+cycles=20000
+initial_per_server=100
+min_time=10
+max_time=100
+cooldown=50
+max_servers=200
+arrival_probability=0.12
+burst_min=1
+burst_max=5
+seed=412
+blocked_start=10.0.0.0
+blocked_end=10.255.255.255
+verbose=true
+color=true
+log_file=demo.log
