@@ -1,0 +1,15 @@
+PROJECT_NAME = "Relay | Load Balancer"
+PROJECT_BRIEF = "CSCE 412 Project 4 — Peter Shenouda"
+OUTPUT_DIRECTORY = site/docs
+INPUT = mainpage.md Request.h Config.h Config.cpp RequestGenerator.h RequestGenerator.cpp WebServer.h WebServer.cpp LoadBalancer.h LoadBalancer.cpp main.cpp
+USE_MDFILE_AS_MAINPAGE = mainpage.md
+FILE_PATTERNS = *.h *.cpp *.md
+RECURSIVE = NO
+EXTRACT_ALL = YES
+SOURCE_BROWSER = YES
+GENERATE_HTML = YES
+GENERATE_LATEX = NO
+HAVE_DOT = NO
+QUIET = YES
+WARN_IF_UNDOCUMENTED = YES
+WARN_LOGFILE = doxygen-warnings.txt

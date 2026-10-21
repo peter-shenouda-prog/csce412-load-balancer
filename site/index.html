@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Relay | Load Balancer — Project Design</title>
+<style>
+:root{--maroon:#500000;--ink:#22232a;--muted:#61616b;--paper:#faf8f4;--line:#ded9d2}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,sans-serif}
+header{background:var(--maroon);color:white;padding:22px max(6vw,20px);display:flex;justify-content:space-between;gap:20px;align-items:center}
+.logo{font-weight:850;font-size:25px;letter-spacing:2px}.tag{font-size:13px;letter-spacing:1px}main{max-width:1100px;padding:65px 24px;margin:auto}
+h1{font-size:clamp(38px,6vw,66px);line-height:1.1;letter-spacing:-2px;margin:12px 0 24px}h2{font-size:29px;line-height:1.2;margin-top:52px}h3{font-size:20px}
+.eyebrow{font-size:13px;color:var(--maroon);letter-spacing:2px;font-weight:750}.lead{font-size:21px;max-width:780px;color:var(--muted)}
+a{color:var(--maroon);text-underline-offset:4px}nav{display:flex;gap:22px;flex-wrap:wrap;margin:30px 0 50px}.button{background:var(--maroon);color:white;padding:11px 20px;text-decoration:none;border-radius:4px}
+.facts{display:flex;flex-wrap:wrap;gap:36px;border-block:1px solid var(--line);padding:22px 0}.facts strong{display:block;font-size:28px;color:var(--maroon)}.facts span{font-size:14px}
+.diagram{background:white;border:1px solid var(--line);border-radius:8px;padding:25px;margin:24px 0}.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px}.node{border:2px solid var(--maroon);padding:14px;min-width:150px;text-align:center;border-radius:5px;background:var(--paper)}.arrow{font-size:24px;color:var(--maroon)}
+.control{border:1px dashed var(--maroon);margin:22px auto 0;padding:14px;text-align:center;max-width:660px}.note{font-size:14px;color:var(--muted)}
+table{border-collapse:collapse;width:100%;background:white}th,td{text-align:left;padding:14px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#eee7e3}code{font-size:.9em;background:#eee7e3;padding:2px 5px;overflow-wrap:anywhere}.scroll{overflow:auto}footer{border-top:1px solid var(--line);padding:26px 0;margin-top:50px;color:var(--muted);font-size:14px}
+@media(max-width:600px){header{align-items:flex-start}.tag{max-width:150px}main{padding-top:35px}th,td{padding:10px;font-size:14px}.flow{flex-direction:column}.arrow{transform:rotate(90deg)}}
+</style></head><body>
+<header><div class="logo" style="display:flex;align-items:center;gap:14px"><img src="relay-logo.svg" width="54" height="54" alt="Relay logo"><span>relay.</span></div><div class="tag">PETER SHENOUDA<br>CSCE 412 · PROJECT 4</div></header>
+<main><div class="eyebrow">DESIGN &amp; WORKFLOW</div><h1>Keeping requests moving.</h1>
+<p class="lead">A clock-based C++ simulation that balances incoming web requests across a changing pool of servers.</p>
+<nav aria-label="Project navigation"><a class="button" href="docs/html/index.html">Code documentation ↗</a><a href="#workflow">Workflow</a><a href="#classes">Class design</a><a href="#results">Verified run</a></nav>
+<div class="facts"><div><strong>20</strong><span>starting servers</span></div><div><strong>100,000</strong><span>simulation cycles</span></div><div><strong>50–80</strong><span>target queued requests per active server</span></div></div>
+<h2 id="workflow">01 / From arrival to completion</h2>
+<p>Requests carry a source IP, destination IP, duration and a processing (P) or streaming (S) category. Accepted requests wait in a first-in, first-out queue. Idle servers take the oldest waiting request.</p>
+<div class="diagram" role="img" aria-label="Random requests pass through the firewall. Rejected requests are counted; accepted requests enter a FIFO queue, go to web servers, then complete. A clock and scaling controller manage the queue and server pool.">
+<div class="flow"><div class="node">Random requests</div><span class="arrow" aria-hidden="true">→</span><div class="node">IP range firewall<br><small>Reject blocked sources</small></div><span class="arrow" aria-hidden="true">→</span><div class="node">FIFO queue</div><span class="arrow" aria-hidden="true">→</span><div class="node">Web servers<br><small>Process → complete</small></div></div>
+<div class="control">Clock + scaling controller<br><small>Observe queue → add or retire one server → wait for cooldown → check again</small></div></div>
+<p>At initialization, the queue is filled with 100 accepted requests per starting server. Every cycle samples new arrivals, filters their source addresses, considers scaling, assigns available work, then advances each server by one cycle. Completed work is counted; a retired server is deleted once its current job finishes. The simulation ends at the requested cycle with any unfinished work reported.</p>
+<h2>02 / Capacity changes without losing work</h2>
+<p>When the queue exceeds <strong>80 × active servers</strong>, the controller adds one server. Below <strong>50 × active servers</strong>, it retires one, keeping at least one active. It waits the configured cooldown between changes. Exact threshold equality causes no scaling. The default cooldown is 100 cycles, and allocated capacity is capped at 200 servers.</p>
+<p>Idle servers retire first. A busy retiring server stops accepting work and finishes its current request before deletion. The queue band is a target rather than a guarantee: traffic bursts, cooldowns and capacity limits can temporarily put the queue outside it.</p>
+<h2 id="classes">03 / Class responsibilities</h2><div class="scroll"><table><thead><tr><th>Component</th><th>Owns / stores</th><th>Main operations</th></tr></thead><tbody>
+<tr><td><strong>Request</strong></td><td>ipIn, ipOut, time, jobType</td><td>Simple data struct passed between generator, queue and server.</td></tr>
+<tr><td><strong>Config</strong></td><td>Traffic, timing, firewall, logging and capacity settings</td><td>load(path) → Config; validate() → error on invalid values.</td></tr>
+<tr><td><strong>RequestGenerator</strong></td><td>Seeded random engine and settings</td><td>next() → Request; arrives() → bool; burst() → int.</td></tr>
+<tr><td><strong>WebServer</strong></td><td>ID, optional current request, remaining time, retirement flag</td><td>assign(Request); tick() → optional completed Request; retire(); status accessors.</td></tr>
+<tr><td><strong>LoadBalancer</strong></td><td>queue&lt;Request&gt;, uniquely owned servers, generator, counters and log</td><td>Construct from Config; run() → advances the full simulation and writes summaries.</td></tr>
+<tr><td><strong>main</strong></td><td>Command-line choices and interactive inputs</td><td>Load settings, optionally ask for servers/cycles, construct and run a balancer.</td></tr>
+</tbody></table></div><p class="note">LoadBalancer owns its servers; each WebServer holds at most one Request. Each load balancer instance owns its queue and statistics. The optional concurrent switch bonus is not implemented.</p>
+<h2>04 / Configuration and observability</h2><p>Edit <code>config.txt</code> to change arrival probability, burst size, task duration range, server limits, cooldown, blocked source range and random seed. <code>--interactive</code> asks for the starting server count and duration. Quiet mode writes beginning/end summaries; verbose mode adds arrival, blocking, assignment, completion and scaling events. Console color is optional; the log is plain text.</p>
+<h2 id="results">05 / Verified reference run</h2><p>Actual results from the C++ simulator using <code>config.txt</code> on Ubuntu. Starting with 20 servers means capacity is allowed to change during the run.</p>
+<div class="scroll"><table><tbody><tr><th>Measure</th><th>Result</th></tr><tr><td>Starting / ending queue</td><td>2,000 / 1,528 requests</td></tr><tr><td>Task duration range</td><td>10–100 clock cycles, inclusive</td></tr><tr><td>Completed / in flight at stop</td><td>35,831 / 20</td></tr><tr><td>Generated / rejected</td><td>37,548 / 169</td></tr><tr><td>Added / retired servers</td><td>7 / 6</td></tr><tr><td>Final / minimum / maximum active servers</td><td>21 / 19 / 25</td></tr></tbody></table></div>
+<p>Every cycle verifies that generated requests equal rejected + completed + queued + in-flight requests. Tests also cover exact processing time, safe retirement, configuration errors, quiet/verbose output, capacity limits and source-IP blocking.</p>
+<footer>Relay · Peter Shenouda · CSCE 412<br>Student project with disclosed ChatGPT/Codex assistance. Implementation reference. The original pre-deliverable remains available in the parent project folder.</footer>
+</main></body></html>

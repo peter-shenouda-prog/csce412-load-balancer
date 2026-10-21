@@ -1,0 +1,76 @@
+=== START SUMMARY ===
+Initial servers: 20
+Configured clock cycles: 100000
+Elapsed clock cycles: 0
+Queue size: 2000
+Task time range: 10..100 cycles (inclusive)
+Seed: 412
+Arrival probability per cycle: 0.12
+Arrival burst range: 1..5
+Scaling thresholds: below 50 * active servers / above 80 * active servers
+Scaling cooldown: 100 cycles
+Blocked source range: 10.0.0.0..10.255.255.255
+Generated requests (including rejected): 2010
+Accepted requests: 2000
+Rejected requests: 10
+Discarded accepted requests: 0
+Assigned requests: 0
+Completed requests: 0
+Completed processing: 0
+Completed streaming: 0
+Arrival events: 0
+New requests after initialization: 0
+Active servers (accepting work): 20
+Busy servers (including draining): 0
+Idle active servers: 20
+Draining servers: 0
+Allocated servers: 20
+Deallocated inactive servers: 0
+Server additions: 0
+Server retirements: 0
+Minimum / maximum active servers: 20 / 20
+Capacity-limit events: 0
+Peak queue size: 2000
+Average end-of-cycle queue: 0.00
+Server utilization (% of allocated server-cycles): 0.00
+Conservation: generated = rejected + completed + queued + in-flight
+Conservation check: PASS
+
+=== END SUMMARY ===
+Initial servers: 20
+Configured clock cycles: 100000
+Elapsed clock cycles: 100000
+Queue size: 1528
+Task time range: 10..100 cycles (inclusive)
+Seed: 412
+Arrival probability per cycle: 0.12
+Arrival burst range: 1..5
+Scaling thresholds: below 50 * active servers / above 80 * active servers
+Scaling cooldown: 100 cycles
+Blocked source range: 10.0.0.0..10.255.255.255
+Generated requests (including rejected): 37548
+Accepted requests: 37379
+Rejected requests: 169
+Discarded accepted requests: 0
+Assigned requests: 35851
+Completed requests: 35831
+Completed processing: 17938
+Completed streaming: 17893
+Arrival events: 11816
+New requests after initialization: 35538
+Active servers (accepting work): 21
+Busy servers (including draining): 20
+Idle active servers: 1
+Draining servers: 0
+Allocated servers: 21
+Deallocated inactive servers: 6
+Server additions: 7
+Server retirements: 6
+Minimum / maximum active servers: 19 / 25
+Capacity-limit events: 0
+Peak queue size: 2000
+Average end-of-cycle queue: 1309.60
+Server utilization (% of allocated server-cycles): 100.00
+Conservation: generated = rejected + completed + queued + in-flight
+Conservation check: PASS
+
