@@ -18,7 +18,7 @@ table{border-collapse:collapse;width:100%;background:white}th,td{text-align:left
 <header><div class="logo" style="display:flex;align-items:center;gap:14px"><img src="relay-logo.svg" width="54" height="54" alt="Relay logo"><span>relay.</span></div><div class="tag">PETER SHENOUDA<br>CSCE 412 · PROJECT 4</div></header>
 <main><div class="eyebrow">DESIGN &amp; WORKFLOW</div><h1>Keeping requests moving.</h1>
 <p class="lead">A clock-based C++ simulation that balances incoming web requests across a changing pool of servers.</p>
-<nav aria-label="Project navigation"><a class="button" href="docs/html/index.html">Code documentation ↗</a><a href="#workflow">Workflow</a><a href="#classes">Class design</a><a href="#results">Verified run</a></nav>
+<nav aria-label="Project navigation"><a class="button" href="docs/html/index.html">Code documentation ↗</a><a href="#workflow">Workflow</a><a href="#classes">Class design</a><a href="#results">Verified run</a><a href="https://people.tamu.edu/~peter.shenouda/project4/final/project-demo.mp4">Video walkthrough ↗</a></nav>
 <div class="facts"><div><strong>20</strong><span>starting servers</span></div><div><strong>100,000</strong><span>simulation cycles</span></div><div><strong>50–80</strong><span>target queued requests per active server</span></div></div>
 <h2 id="workflow">01 / From arrival to completion</h2>
 <p>Requests carry a source IP, destination IP, duration and a processing (P) or streaming (S) category. Accepted requests wait in a first-in, first-out queue. Idle servers take the oldest waiting request.</p>

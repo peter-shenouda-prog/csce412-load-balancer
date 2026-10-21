@@ -113,3 +113,11 @@ The initial Request structure and the completed implementation, documentation,
 tests and packaging were produced with ChatGPT/Codex assistance at the student's
 request, based on the student's report that the instructor permitted full AI
 assistance. The implementation and test results can be inspected in this repository.
+
+## Video walkthrough
+
+The hosted video uses actual source and captured C++ program output with
+synthesized narration, rather than a live terminal screen recording.
+See VIDEO-TRANSCRIPT.md or DEMO-GUIDE.md for a student-recorded alternative.
+
+https://people.tamu.edu/~peter.shenouda/project4/final/project-demo.mp4

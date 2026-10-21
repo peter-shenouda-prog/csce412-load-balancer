@@ -10,8 +10,12 @@
    Your previously submitted design remains unchanged at /project4/.
 5. Git repository:
    https://github.com/peter-shenouda-prog/csce412-load-balancer
-6. Video: record your own short demonstration using DEMO-GUIDE.md, then upload
-   it and submit the recording or its actual link. No video is included.
+6. Video walkthrough: project-demo.mp4, with actual source/run output and
+   synthesized narration. Public link:
+   https://people.tamu.edu/~peter.shenouda/project4/final/project-demo.mp4
+   This is a narrated walkthrough, not a live terminal screen recording. If your
+   instructor requires you to speak or operate the program on camera, use
+   DEMO-GUIDE.md to record that version yourself.
 
 The GitHub repository is private. Grant your instructor/TA access before
 submitting its link, or change its visibility if the course requires public access.
