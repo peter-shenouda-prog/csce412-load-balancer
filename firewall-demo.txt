@@ -1,0 +1,17 @@
+# Controlled high-arrival scenario; the same real firewall filters all arrivals.
+servers=2
+cycles=50
+initial_per_server=0
+min_time=1
+max_time=2
+cooldown=10
+max_servers=20
+arrival_probability=1
+burst_min=20
+burst_max=20
+seed=412
+blocked_start=10.0.0.0
+blocked_end=10.255.255.255
+verbose=true
+color=false
+log_file=firewall-demo.log

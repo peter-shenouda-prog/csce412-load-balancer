@@ -1,0 +1,274 @@
+RELAY | LOAD BALANCER EXECUTION EVIDENCE
+Peter Shenouda | CSCE 412 Project 4
+20 starting servers | 100000 cycles | config.txt | seed 412
+Summary and all scaling, blocking, and deallocation events from the actual C++ run.
+Per-request assignment/completion/arrival chatter is omitted for readability.
+The unchanged quiet-only output is supplied separately as required-run.txt.
+Initialization BLOCK events are cycle 0 and are listed after the starting summary.
+
+=== START SUMMARY ===
+Initial servers: 20
+Configured clock cycles: 100000
+Elapsed clock cycles: 0
+Queue size: 2000
+Task time range: 10..100 cycles (inclusive)
+Seed: 412
+Arrival probability per cycle: 0.12
+Arrival burst range: 1..5
+Scaling thresholds: below 50 * active servers / above 80 * active servers
+Scaling cooldown: 100 cycles
+Blocked source range: 10.0.0.0..10.255.255.255
+Generated requests (including rejected): 2010
+Accepted requests: 2000
+Rejected requests: 10
+Discarded accepted requests: 0
+Assigned requests: 0
+Completed requests: 0
+Completed processing: 0
+Completed streaming: 0
+Arrival events: 0
+New requests after initialization: 0
+Active servers (accepting work): 20
+Busy servers (including draining): 0
+Idle active servers: 20
+Draining servers: 0
+Allocated servers: 20
+Deallocated inactive servers: 0
+Server additions: 0
+Server retirements: 0
+Minimum / maximum active servers: 20 / 20
+Capacity-limit events: 0
+Peak queue size: 2000
+Average end-of-cycle queue: 0.00
+Server utilization (% of allocated server-cycles): 0.00
+Conservation: generated = rejected + completed + queued + in-flight
+Conservation check: PASS
+
+=== SIGNIFICANT EVENTS (ALL BLOCKS AND CAPACITY CHANGES) ===
+[cycle 0] BLOCK source=10.65.59.231
+[cycle 0] BLOCK source=10.187.139.129
+[cycle 0] BLOCK source=10.202.27.44
+[cycle 0] BLOCK source=10.88.234.231
+[cycle 0] BLOCK source=10.71.50.230
+[cycle 0] BLOCK source=10.162.113.211
+[cycle 0] BLOCK source=10.55.175.136
+[cycle 0] BLOCK source=10.64.128.74
+[cycle 0] BLOCK source=10.36.154.104
+[cycle 0] BLOCK source=10.151.206.186
+[cycle 100] SCALE UP active=21 queue=1974
+[cycle 200] SCALE UP active=22 queue=1982
+[cycle 300] SCALE UP active=23 queue=1982
+[cycle 400] SCALE UP active=24 queue=1985
+[cycle 500] SCALE UP active=25 queue=1969
+[cycle 1021] BLOCK source=10.235.115.150
+[cycle 1331] BLOCK source=10.109.131.149
+[cycle 1563] BLOCK source=10.239.236.73
+[cycle 1667] BLOCK source=10.109.121.99
+[cycle 1851] BLOCK source=10.198.205.142
+[cycle 2062] BLOCK source=10.176.49.208
+[cycle 2062] BLOCK source=10.91.220.148
+[cycle 3721] BLOCK source=10.57.245.253
+[cycle 4473] BLOCK source=10.191.126.178
+[cycle 4487] BLOCK source=10.132.133.188
+[cycle 5617] BLOCK source=10.85.31.20
+[cycle 5847] BLOCK source=10.212.63.20
+[cycle 5954] BLOCK source=10.57.211.193
+[cycle 6319] BLOCK source=10.115.152.21
+[cycle 7044] SCALE DOWN retire server=18 active=24 queue=1249
+[cycle 7044] DEALLOCATE server=18
+[cycle 7089] BLOCK source=10.61.77.150
+[cycle 7831] BLOCK source=10.193.120.105
+[cycle 7899] SCALE DOWN retire server=1 active=23 queue=1199
+[cycle 7914] DEALLOCATE server=1
+[cycle 8410] SCALE DOWN retire server=2 active=22 queue=1148
+[cycle 8438] DEALLOCATE server=2
+[cycle 8848] SCALE DOWN retire server=11 active=21 queue=1099
+[cycle 8848] DEALLOCATE server=11
+[cycle 9255] BLOCK source=10.216.83.119
+[cycle 9554] BLOCK source=10.57.88.251
+[cycle 10716] BLOCK source=10.155.228.99
+[cycle 10838] BLOCK source=10.166.149.237
+[cycle 12354] BLOCK source=10.88.145.183
+[cycle 12619] SCALE DOWN retire server=6 active=20 queue=1048
+[cycle 12619] DEALLOCATE server=6
+[cycle 12620] BLOCK source=10.12.199.34
+[cycle 13733] BLOCK source=10.192.231.130
+[cycle 14058] BLOCK source=10.252.69.127
+[cycle 14362] BLOCK source=10.241.47.128
+[cycle 14535] BLOCK source=10.171.55.81
+[cycle 17169] BLOCK source=10.108.98.174
+[cycle 17656] BLOCK source=10.213.55.56
+[cycle 17698] BLOCK source=10.137.101.130
+[cycle 18281] BLOCK source=10.117.133.166
+[cycle 19036] BLOCK source=10.247.24.253
+[cycle 19480] BLOCK source=10.171.80.29
+[cycle 20197] BLOCK source=10.75.131.68
+[cycle 20302] BLOCK source=10.178.27.24
+[cycle 20434] BLOCK source=10.155.13.196
+[cycle 20768] BLOCK source=10.191.241.170
+[cycle 21063] BLOCK source=10.117.62.157
+[cycle 21392] BLOCK source=10.229.244.14
+[cycle 21467] BLOCK source=10.190.15.130
+[cycle 21621] SCALE DOWN retire server=3 active=19 queue=998
+[cycle 21646] DEALLOCATE server=3
+[cycle 24251] BLOCK source=10.219.209.170
+[cycle 24276] BLOCK source=10.249.12.77
+[cycle 24525] BLOCK source=10.139.213.146
+[cycle 24994] BLOCK source=10.30.32.51
+[cycle 25022] BLOCK source=10.161.72.144
+[cycle 26291] BLOCK source=10.1.120.10
+[cycle 26908] BLOCK source=10.32.74.68
+[cycle 27090] BLOCK source=10.15.184.174
+[cycle 28390] BLOCK source=10.71.193.213
+[cycle 28865] BLOCK source=10.226.86.197
+[cycle 28868] BLOCK source=10.170.222.240
+[cycle 29275] BLOCK source=10.224.26.124
+[cycle 29699] BLOCK source=10.235.88.227
+[cycle 30095] BLOCK source=10.50.64.176
+[cycle 30430] BLOCK source=10.169.213.65
+[cycle 30518] BLOCK source=10.28.136.40
+[cycle 33468] BLOCK source=10.96.41.139
+[cycle 33900] BLOCK source=10.52.154.232
+[cycle 37388] BLOCK source=10.214.210.250
+[cycle 37706] BLOCK source=10.48.18.110
+[cycle 37905] BLOCK source=10.245.73.218
+[cycle 38154] BLOCK source=10.102.47.153
+[cycle 38348] BLOCK source=10.45.160.167
+[cycle 38672] BLOCK source=10.245.62.42
+[cycle 40176] BLOCK source=10.225.10.110
+[cycle 40399] BLOCK source=10.249.6.147
+[cycle 40427] BLOCK source=10.94.10.162
+[cycle 40551] BLOCK source=10.40.253.141
+[cycle 40742] BLOCK source=10.105.219.57
+[cycle 41257] BLOCK source=10.71.43.106
+[cycle 41834] BLOCK source=10.28.160.168
+[cycle 42240] BLOCK source=10.153.87.99
+[cycle 42341] BLOCK source=10.171.138.52
+[cycle 42825] BLOCK source=10.61.234.13
+[cycle 45229] BLOCK source=10.39.158.227
+[cycle 45645] BLOCK source=10.205.37.59
+[cycle 46079] BLOCK source=10.220.201.207
+[cycle 46503] BLOCK source=10.16.34.199
+[cycle 47064] BLOCK source=10.9.150.158
+[cycle 47547] BLOCK source=10.171.70.112
+[cycle 48488] BLOCK source=10.64.18.231
+[cycle 49790] BLOCK source=10.165.217.39
+[cycle 50519] BLOCK source=10.17.133.205
+[cycle 51779] BLOCK source=10.185.94.68
+[cycle 52173] BLOCK source=10.127.71.219
+[cycle 52511] BLOCK source=10.239.162.202
+[cycle 53050] BLOCK source=10.13.175.105
+[cycle 54724] BLOCK source=10.182.53.99
+[cycle 55859] BLOCK source=10.183.190.209
+[cycle 56818] BLOCK source=10.185.225.231
+[cycle 56828] BLOCK source=10.199.101.199
+[cycle 57061] BLOCK source=10.103.216.163
+[cycle 58626] BLOCK source=10.169.241.85
+[cycle 58725] BLOCK source=10.171.1.191
+[cycle 60673] BLOCK source=10.57.124.189
+[cycle 61390] BLOCK source=10.87.208.32
+[cycle 63305] BLOCK source=10.65.141.230
+[cycle 63585] BLOCK source=10.31.94.247
+[cycle 63644] BLOCK source=10.210.119.14
+[cycle 63752] BLOCK source=10.87.211.155
+[cycle 63939] BLOCK source=10.9.26.54
+[cycle 64945] BLOCK source=10.202.113.160
+[cycle 65107] BLOCK source=10.232.106.216
+[cycle 65533] BLOCK source=10.177.212.3
+[cycle 65654] BLOCK source=10.45.236.177
+[cycle 66307] BLOCK source=10.248.172.54
+[cycle 68584] BLOCK source=10.6.98.214
+[cycle 68637] BLOCK source=10.32.153.10
+[cycle 68795] BLOCK source=10.222.90.129
+[cycle 68795] BLOCK source=10.166.59.45
+[cycle 68857] BLOCK source=10.122.202.119
+[cycle 70320] BLOCK source=10.62.81.124
+[cycle 71215] BLOCK source=10.107.114.244
+[cycle 71584] BLOCK source=10.246.143.204
+[cycle 71784] BLOCK source=10.215.255.151
+[cycle 73083] BLOCK source=10.46.4.111
+[cycle 73130] BLOCK source=10.71.71.142
+[cycle 73426] BLOCK source=10.221.21.124
+[cycle 75358] BLOCK source=10.37.135.148
+[cycle 76847] BLOCK source=10.212.140.110
+[cycle 77435] BLOCK source=10.102.174.37
+[cycle 77579] BLOCK source=10.55.7.119
+[cycle 77827] BLOCK source=10.233.96.132
+[cycle 78007] BLOCK source=10.174.129.192
+[cycle 78011] BLOCK source=10.230.122.233
+[cycle 78610] BLOCK source=10.42.252.204
+[cycle 79438] BLOCK source=10.209.19.98
+[cycle 80215] BLOCK source=10.121.107.183
+[cycle 80482] BLOCK source=10.33.167.173
+[cycle 81071] BLOCK source=10.150.183.166
+[cycle 82416] BLOCK source=10.21.56.204
+[cycle 82637] BLOCK source=10.191.27.179
+[cycle 84391] BLOCK source=10.171.246.131
+[cycle 84716] BLOCK source=10.197.196.79
+[cycle 87310] SCALE UP active=20 queue=1523
+[cycle 88722] BLOCK source=10.27.178.117
+[cycle 88935] BLOCK source=10.137.68.232
+[cycle 89125] BLOCK source=10.50.116.220
+[cycle 89862] BLOCK source=10.147.64.155
+[cycle 89932] BLOCK source=10.202.181.164
+[cycle 90063] BLOCK source=10.167.77.140
+[cycle 90661] BLOCK source=10.73.201.42
+[cycle 90735] BLOCK source=10.203.58.127
+[cycle 91835] BLOCK source=10.215.41.86
+[cycle 92811] BLOCK source=10.39.38.199
+[cycle 93045] BLOCK source=10.234.83.180
+[cycle 93068] BLOCK source=10.27.20.246
+[cycle 93215] BLOCK source=10.103.55.122
+[cycle 94100] BLOCK source=10.19.135.219
+[cycle 94813] BLOCK source=10.114.146.100
+[cycle 95523] BLOCK source=10.49.19.21
+[cycle 95856] BLOCK source=10.212.77.24
+[cycle 97084] BLOCK source=10.207.232.182
+[cycle 97480] BLOCK source=10.66.186.214
+[cycle 98369] BLOCK source=10.1.137.119
+[cycle 98453] BLOCK source=10.1.244.158
+[cycle 98808] BLOCK source=10.165.240.22
+[cycle 98985] SCALE UP active=21 queue=1603
+[cycle 99019] BLOCK source=10.1.126.189
+[cycle 99167] BLOCK source=10.77.81.24
+[cycle 99295] BLOCK source=10.80.158.241
+[cycle 99834] BLOCK source=10.25.205.92
+
+=== END SUMMARY ===
+Initial servers: 20
+Configured clock cycles: 100000
+Elapsed clock cycles: 100000
+Queue size: 1528
+Task time range: 10..100 cycles (inclusive)
+Seed: 412
+Arrival probability per cycle: 0.12
+Arrival burst range: 1..5
+Scaling thresholds: below 50 * active servers / above 80 * active servers
+Scaling cooldown: 100 cycles
+Blocked source range: 10.0.0.0..10.255.255.255
+Generated requests (including rejected): 37548
+Accepted requests: 37379
+Rejected requests: 169
+Discarded accepted requests: 0
+Assigned requests: 35851
+Completed requests: 35831
+Completed processing: 17938
+Completed streaming: 17893
+Arrival events: 11816
+New requests after initialization: 35538
+Active servers (accepting work): 21
+Busy servers (including draining): 20
+Idle active servers: 1
+Draining servers: 0
+Allocated servers: 21
+Deallocated inactive servers: 6
+Server additions: 7
+Server retirements: 6
+Minimum / maximum active servers: 19 / 25
+Capacity-limit events: 0
+Peak queue size: 2000
+Average end-of-cycle queue: 1309.60
+Server utilization (% of allocated server-cycles): 100.00
+Conservation: generated = rejected + completed + queued + in-flight
+Conservation check: PASS
+

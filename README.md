@@ -114,10 +114,20 @@ tests and packaging were produced with ChatGPT/Codex assistance at the student's
 request, based on the student's report that the instructor permitted full AI
 assistance. The implementation and test results can be inspected in this repository.
 
-## Video walkthrough
+## Reviewed submission evidence
 
-The hosted video uses actual source and captured C++ program output with
-synthesized narration, rather than a live terminal screen recording.
-See VIDEO-TRANSCRIPT.md or DEMO-GUIDE.md for a student-recorded alternative.
+See RUBRIC-AUDIT.md for the October 25 Canvas/TA review. load-balancer-log.txt
+contains the actual required run's summaries and all blocking/scaling/deallocation
+events, without routine assignment chatter. required-run.txt remains quiet-only.
+firewall-demo.txt is a reproducible high-arrival rejection scenario.
 
-https://people.tamu.edu/~peter.shenouda/project4/final/project-demo.mp4
+## Video status
+
+The 1:55 real terminal-session recording is ready as demo-terminal-silent.mp4 in
+the deliverables folder. It includes actual input, execution, distribution,
+scaling, rejection and tests. DEMO-VOICEOVER.md supplies the timed narration.
+Student voice audio must still be added before final video submission. The old
+five-minute synthesized slideshow is superseded and should not be submitted.
+
+Repository: https://github.com/peter-shenouda-prog/csce412-load-balancer (public)
+History: https://github.com/peter-shenouda-prog/csce412-load-balancer/commits/main/
