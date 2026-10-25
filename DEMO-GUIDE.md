@@ -1,45 +1,29 @@
-# Video demonstration guide
+# Final demo preparation
 
-Record your screen and your own explanation for about 3–5 minutes. This guide
-is not a recorded video. Practice the commands first in a Linux/WSL terminal.
+Use demo-terminal-silent.mp4: the replacement is a real terminal-session
+recording lasting 1 minute 55 seconds. Read DEMO-VOICEOVER.md and record your
+voice. Supply the audio so it can be synchronized to the footage. Keep the
+completed export below three minutes. The old five-minute slideshow is superseded.
 
-## 1. Explain the design (about 40 seconds)
-Open `site/index.html`. Explain: requests pass through an IP blocker, wait in a
-FIFO queue, then go to idle servers. Every simulated cycle advances processing.
-The controller adds or retires servers based on queued requests per active server.
-The 50/80 threshold gap and cooldown reduce rapid repeated capacity changes.
+The recording shows Request/WebServer/LoadBalancer structures, interactive input
+of 20 servers and 100000 cycles, quiet results, actual assignments to multiple
+servers, scale-up and scale-down events, and the high-arrival firewall scenario.
+It ends with passing tests and a conclusion. The terminal cast preserves the
+actual captured session and original event timestamps.
 
-## 2. Show classes and structures (about 50 seconds)
-Open Request.h, WebServer.h and LoadBalancer.h. Point out the four request fields,
-the server's current request and remaining time, the queue<Request>, and the
-vector<unique_ptr<WebServer>> that dynamically owns the servers. Explain that a
-busy retiring server finishes before deletion. Show Config.h and config.txt.
+For a new live demonstration, run from the project directory:
 
-## 3. Build, input and quiet run (about 50 seconds)
 ```sh
 make
 ./loadbalancer config.txt --interactive --quiet
-```
-Enter `20` then `100000`. Show the start and end summaries: initial queue 2000,
-time range 10–100, completed/queued/in-flight/rejected counts, active and retired
-servers, additions and retirements. Explain that 20 is the starting count and
-dynamic scaling intentionally changes it. Show that the accounting totals match.
-
-## 4. Show event mode and capacity changes (about 50 seconds)
-```sh
-./loadbalancer demo.txt --verbose --color
-grep -E 'SCALE UP|SCALE DOWN|DEALLOCATE|BLOCK' demo.log | head -25
-```
-Point out both SCALE UP and SCALE DOWN. If the first 25 lines contain too many
-BLOCK messages, use `grep 'SCALE' demo.log`. Show ARRIVAL, ASSIGN and COMPLETE
-events. Explain that the log records useful changes rather than every idle tick.
-Color is optional, and the log remains readable plain text.
-
-## 5. Finish (about 30 seconds)
-```sh
+# Enter 20, then 100000.
+./loadbalancer demo.txt --verbose > demo-output.txt
+grep 'ASSIGN server=' demo.log | head -5
+grep 'SCALE' demo.log
+./loadbalancer firewall-demo.txt --verbose > firewall-output.txt
+grep 'BLOCK source=' firewall-demo.log
 make test
 ```
-Show the passing tests, Doxygen website, and your Git repository after uploading.
-Mention that job types are generated and reported; the optional bonus switch is
-not implemented. End with what you learned about queues, scaling and AI-assisted
-verification. Explain the code in your own words and disclose AI assistance.
+
+RUBRIC-AUDIT.md maps the footage and artifacts to the actual Canvas criteria
+and the TA follow-up. No final video with student narration is claimed yet.
