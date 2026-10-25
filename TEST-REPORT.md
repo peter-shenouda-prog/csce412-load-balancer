@@ -26,5 +26,3 @@ The build and make test passed again. Quiet and verbose required-run summaries
 matched exactly. All 169 blocks, 7 additions and 6 retirements were retained in
 the concise execution-evidence log. The separate 50-cycle, 1000-arrival firewall
 scenario rejected 3 matching 10.* source addresses and accepted 997 others.
-The 1:55 PTY recording was rendered to H.264 MP4 and visually checked at the
-input, results, scaling and rejection sections. Narration remains pending.
